@@ -33,7 +33,6 @@ export class BackendService {
       .get<Book[]>(this.baseUrl + '/BorrowedBooks/', {
         headers: {
           'Access-Control-Allow-Origin': '*',
-          // 'Content-Type': 'application/json'
         },
       })
       .toPromise();
@@ -43,7 +42,6 @@ export class BackendService {
       .get<Book[]>(this.baseUrl + '/libraryBooks/', {
         headers: {
           'Access-Control-Allow-Origin': '*',
-          // 'Content-Type': 'application/json'
         },
       })
       .toPromise();
