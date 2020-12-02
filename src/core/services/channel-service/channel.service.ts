@@ -9,9 +9,7 @@ import { BackendService } from '../backend-service/backend.service';
 export class ChannelService {
   libraryBookList: Book[] = [];
   userBorrowedBookList: Book[] = [];
-  constructor(private backend: BackendService) {
-    // this.getLibraryBookList();
-  }
+  constructor(private backend: BackendService) {}
   returnedData: string = '';
 
   borrowBook(bookId: string) {
@@ -50,13 +48,16 @@ export class ChannelService {
     return this.libraryBookList;
   }
 
-  getBorrowedBookList() {
-    this.backend.getBorrowedBookList().subscribe({
-      next: (data) => {
+  async getBorrowedBookList() {
+    await this.backend
+      .getBorrowedBookList()
+      .then((data) => {
+        console.log(JSON.stringify(data));
         this.userBorrowedBookList = data;
-      },
-      error: (err) => console.log('error' + err),
-    });
+      })
+      .catch((error) => {
+        console.log('Promise rejected with ' + JSON.stringify(error));
+      });
 
     return this.userBorrowedBookList;
   }

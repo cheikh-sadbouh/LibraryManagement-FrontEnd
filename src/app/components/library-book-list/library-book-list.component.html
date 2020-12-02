@@ -30,8 +30,8 @@
               <p>{{ book.numberOfCopy }} copy</p>
               <br />
               <button
-                [disabled]="clicked"
-                (click)="borrowBook(book.isbn); clicked = true"
+                [disabled]="book.isBorrowed"
+                (click)="borrowBook(book.isbn)"
                 class="btn btn-primary btn-sm float-right maringup"
               >
                 borrow

@@ -8,7 +8,7 @@ import { ChannelService } from 'src/core/services/channel-service/channel.servic
   styleUrls: ['./library-book-list.component.css'],
 })
 export class LibraryBookListComponent implements OnInit {
-  libraryBookList: Book[];
+  libraryBookList: any[];
   constructor(private channelService: ChannelService) {
     this.getLibraryBookList();
   }
@@ -20,13 +20,22 @@ export class LibraryBookListComponent implements OnInit {
 
     this.libraryBookList.forEach((book) => {
       if (book.isbn == bookId) {
-        console.log('found ');
         book.numberOfCopy = book.numberOfCopy - 1;
+        book.isBorrowed = true;
       }
     });
   }
 
   async getLibraryBookList() {
     this.libraryBookList = await this.channelService.getLibraryBookList();
+  }
+
+  mergelibraryBookListWithchecker() {
+    for (var i = 0; i < this.libraryBookList.length; i++) {
+      // merge objects into one with multiple props
+      this.libraryBookList[i] = Object.assign(this.libraryBookList[i], {
+        isBorrowed: false,
+      });
+    }
   }
 }

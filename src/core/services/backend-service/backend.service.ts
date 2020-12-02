@@ -28,11 +28,15 @@ export class BackendService {
       );
   }
 
-  getBorrowedBookList(): Observable<Book[]> {
-    return this.http.get<Book[]>(this.baseUrl + '/BorrowedBooks/', {}).pipe(
-      tap((data) => console.log('Data : ' + JSON.stringify(data))),
-      catchError(this.handleError)
-    );
+  getBorrowedBookList() {
+    return this.http
+      .get<Book[]>(this.baseUrl + '/BorrowedBooks/', {
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          // 'Content-Type': 'application/json'
+        },
+      })
+      .toPromise();
   }
   getLibraryBookList() {
     return this.http

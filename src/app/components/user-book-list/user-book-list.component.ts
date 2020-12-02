@@ -15,10 +15,12 @@ export class UserBookListComponent implements OnInit {
   ngOnInit(): void {}
 
   returnBook(bookId: string) {
-    if (this.channelService.returnBook(bookId).includes('returned'))
-      this.getBorrowedBookList();
+    this.channelService.returnBook(bookId);
+
+    this.getBorrowedBookList();
   }
-  getBorrowedBookList() {
-    this.userBorrowedBookList = this.channelService.getBorrowedBookList();
+  async getBorrowedBookList() {
+    console.log('called getBorrowedBookList');
+    this.userBorrowedBookList = await this.channelService.getBorrowedBookList();
   }
 }

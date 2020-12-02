@@ -1,23 +1,25 @@
 <div class="container-fluid">
+  <div class="jumbotron" *ngIf="userBorrowedBookList?.length == 0">
+    <h1 class="display-5">Your Borrowed Book List is Empty</h1>
+  </div>
   <div class="row">
-    <div class="col-md-6" *ngFor="let i of userBorrowedBookList">
+    <div class="col-md-6" *ngFor="let book of userBorrowedBookList">
       <div class="card float-right">
         <div class="row">
           <div class="col-sm-4">
-            <img class="d-block w-100" src="{{ i.thumbnailUrl }}" alt="" />
+            <img class="d-block w-100" src="{{ book.thumbnailUrl }}" alt="" />
           </div>
           <div class="col-sm-7">
             <div class="card-block">
-              <p>{{ i.title }}</p>
-              <p>{{ i.description }}</p>
-              <p>copies : {{ i.numberOfCopy }}</p>
+              <p>{{ book.title }}</p>
+              <p>{{ book.description }}</p>
               <br />
-              <a
-                href="#"
-                (click)="returnBook(i.isbn)"
+              <button
+                (click)="returnBook(book.isbn)"
                 class="btn btn-primary btn-sm float-right"
-                >retun</a
               >
+                retun
+              </button>
             </div>
           </div>
         </div>
