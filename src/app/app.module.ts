@@ -7,9 +7,10 @@ import { LibraryBookListComponent } from './components/library-book-list/library
 import { UserBookListComponent } from './components/user-book-list/user-book-list.component';
 import { HttpClientModule } from '@angular/common/http';
 
+import { MatCardModule } from '@angular/material/card';
 @NgModule({
   declarations: [AppComponent, LibraryBookListComponent, UserBookListComponent],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule],
+  imports: [BrowserModule, AppRoutingModule, HttpClientModule, MatCardModule],
   providers: [],
   bootstrap: [AppComponent],
 })

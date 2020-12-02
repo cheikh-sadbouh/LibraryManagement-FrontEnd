@@ -1,15 +1,24 @@
 import { Component, OnInit } from '@angular/core';
-
+import { Book } from 'src/core/model/Book';
+import { ChannelService } from '../../../core/services/channel-service/channel.service';
 @Component({
   selector: 'app-user-book-list',
   templateUrl: './user-book-list.component.html',
   styleUrls: ['./user-book-list.component.css'],
 })
 export class UserBookListComponent implements OnInit {
-  constructor() {}
+  userBorrowedBookList: Book[];
+  constructor(private channelService: ChannelService) {
+    this.getBorrowedBookList();
+  }
 
   ngOnInit(): void {}
 
-  returnBook(bookId: string) {}
-  getBorrowedBookList() {}
+  returnBook(bookId: string) {
+    if (this.channelService.returnBook(bookId).includes('returned'))
+      this.getBorrowedBookList();
+  }
+  getBorrowedBookList() {
+    this.userBorrowedBookList = this.channelService.getBorrowedBookList();
+  }
 }

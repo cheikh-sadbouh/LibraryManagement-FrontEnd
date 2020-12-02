@@ -7,7 +7,7 @@ import { Book } from '../../model/Book';
   providedIn: 'root',
 })
 export class BackendService {
-  private baseUrl = 'http://localhost:8000/api/v1';
+  private baseUrl = 'http://localhost:8090/api/v1';
 
   constructor(private http: HttpClient) {}
 
@@ -34,11 +34,15 @@ export class BackendService {
       catchError(this.handleError)
     );
   }
-  getLibraryBookList(): Observable<Book[]> {
-    return this.http.get<Book[]>(this.baseUrl + '/libraryBooks/', {}).pipe(
-      tap((data) => console.log('Data : ' + JSON.stringify(data))),
-      catchError(this.handleError)
-    );
+  getLibraryBookList() {
+    return this.http
+      .get<Book[]>(this.baseUrl + '/libraryBooks/', {
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          // 'Content-Type': 'application/json'
+        },
+      })
+      .toPromise();
   }
 
   private handleError(error: any, caught: Observable<any>): any {
